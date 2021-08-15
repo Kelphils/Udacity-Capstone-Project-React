@@ -1,9 +1,37 @@
 version: 2
 jobs:
+  Lint-React-App:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Linting React
+          command: |
+            npm i
+            npm run lint
+      - save_cache:
+          paths: 
+            - ./node_modules
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+
+  Build-React-App:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Building React App
+          command: |
+            npm run build
   build:
     docker:
     # Use the same Docker base as the project
-      - image: circleci/node:10.16.3
+      - image: circleci/node:13.8.0
 
     working_directory: ~/repo
 
@@ -12,11 +40,11 @@ jobs:
       - run:
           name: install hadolint
           command: |            
-            sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-                sudo chmod +x /bin/hadolint
+            wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+                chmod +x /bin/hadolint
       
       # run lint!
       - run:
           name: run lint
           command: |            
-            hadolint Dockerfile 
+            make lint  
