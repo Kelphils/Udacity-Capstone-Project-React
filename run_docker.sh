@@ -1,11 +1,3 @@
-# !/usr/bin/env bash
-
-# create venv
-python3 -m venv ~/.hello
-
-# activate the environment
-source ~/.hello/bin/activate
-
 # Build Image
 docker build --tag=my-running-app . 
 

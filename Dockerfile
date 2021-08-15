@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:10.16.3
 
 # Working Directory
 WORKDIR /app
@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy source code to working directory
 COPY package.json .
 # Install packages from requirements.txt
-RUN npm i
+RUN npm install
 # copy app source code
 COPY . .
 
