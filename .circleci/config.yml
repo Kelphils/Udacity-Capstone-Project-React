@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  Lint-React-App:
+  lint-react-app:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -17,7 +17,7 @@ jobs:
             - ./node_modules
           key: dependency-cache-{{ checksum "package-lock.json" }}
 
-  Build-React-App:
+  build-react-app:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -48,3 +48,9 @@ jobs:
           name: run lint
           command: |            
             hadolint Dockerfile
+  workflows:
+  default:
+    jobs:
+      - lint-react-app
+      - build-react-app:
+          requires: [lint-react-app] 
