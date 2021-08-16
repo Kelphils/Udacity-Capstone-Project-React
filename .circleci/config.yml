@@ -49,8 +49,10 @@ jobs:
           command: |            
             hadolint Dockerfile
   workflows:
-  default:
-    jobs:
-      - lint-react-app
-      - build-react-app:
-          requires: [lint-react-app] 
+    default:
+      jobs:
+        - lint-react-app
+        - build-react-app:
+            requires: [lint-react-app]
+        - build:
+            requires: [build-react-app]
