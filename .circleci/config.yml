@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Linting React
           command: |
-            npm i
+            npm install
             npm run lint
       - save_cache:
           paths: 
@@ -27,6 +27,7 @@ jobs:
       - run:
           name: Building React App
           command: |
+            npm install
             npm run build
   build:
     docker:
