@@ -5,6 +5,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - run:
+          name: Update NPM
+          command: "sudo npm install -g" 
       - restore_cache:
           keys: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
