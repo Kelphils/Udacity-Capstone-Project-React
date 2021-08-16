@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          keys: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Linting React
           command: |
@@ -48,11 +48,11 @@ jobs:
           name: run lint
           command: |            
             hadolint Dockerfile
-  workflows:
-    default:
-      jobs:
-        - lint-react-app
-        - build-react-app:
-            requires: [lint-react-app]
-        - build:
-            requires: [build-react-app]
+workflows:
+  default:
+    jobs:
+      - lint-react-app
+      - build-react-app:
+          requires: [lint-react-app]
+      - build:
+          requires: [build-react-app]
