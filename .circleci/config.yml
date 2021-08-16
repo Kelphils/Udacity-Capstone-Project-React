@@ -19,6 +19,8 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
 
   lint-dockerfile:
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - checkout    
       - run:
