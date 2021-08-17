@@ -55,6 +55,7 @@ jobs:
           root: .
           paths:
             - ./image.tar
+            
   upload-docker-latest:
     executor: docker-publisher
     steps:
@@ -73,12 +74,14 @@ jobs:
             docker push $IMAGE_NAME:$IMAGE_TAG
 
   eks-cluster:
-    executor: docker-publisher
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run: 
           name: Create-Eks-Cluster
           command: |
+            chmod +x check_eks_cluster.sh &&\
             ./check_eks_cluster.sh
 
   
