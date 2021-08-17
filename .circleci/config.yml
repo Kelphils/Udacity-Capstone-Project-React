@@ -73,11 +73,14 @@ jobs:
             docker push $IMAGE_NAME:$IMAGE_TAG
 
   eks-cluster:
+    executor: docker-publisher
     steps:
       - checkout
       - run: 
           name: Create-Eks-Cluster
-          command: ./check_eks_cluster.sh
+          command: |
+            chmod +x &&\
+            ./check_eks_cluster.sh
 
   
 workflows:
