@@ -72,6 +72,14 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
 
+  eks-cluster:
+    steps:
+      - checkout
+      - run: 
+          name: Create-Eks-Cluster
+          command: ./check_eks_cluster.sh
+
+  
 workflows:
   default:
     jobs:
@@ -81,3 +89,4 @@ workflows:
       - docker-build
       - upload-docker-latest:
           requires: [docker-build]
+      - eks-cluster
