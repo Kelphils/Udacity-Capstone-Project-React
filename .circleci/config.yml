@@ -79,7 +79,6 @@ jobs:
       - run: 
           name: Create-Eks-Cluster
           command: |
-            chmod +x check_eks_cluster.sh &&\
             ./check_eks_cluster.sh
 
   
