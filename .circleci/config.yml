@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  shellcheck: circleci/shellcheck@2.2.4
+
 executors:
   docker-publisher:
     environment:
@@ -94,4 +97,6 @@ workflows:
       - docker-build
       - upload-docker-latest:
           requires: [docker-build]
-      - eks-cluster
+      - eks-cluster:
+          requires:
+            - shellcheck/check # only run build-job once shellcheck has run
