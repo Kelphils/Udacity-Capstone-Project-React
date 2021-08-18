@@ -99,4 +99,6 @@ workflows:
           requires: [docker-build]
       - eks-cluster:
           requires:
-            - shellcheck/check # only run build-job once shellcheck has run
+            - shellcheck/check:
+                dir: ./check_eks_cluster.sh
+          exclude: SC2148
