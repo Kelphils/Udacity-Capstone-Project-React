@@ -1,7 +1,4 @@
 version: 2.1
-orbs:
-  shellcheck: circleci/shellcheck@2.2.4
-
 executors:
   docker-publisher:
     environment:
@@ -84,21 +81,16 @@ jobs:
       - run: 
           name: Create-Eks-Cluster
           command: |
+            chmod +x install_kubectl.sh && \
+            ./install_kubectl.sh
+            chmod +x install_eksctl.sh && \
+            ./install_eksctl.sh
             chmod +x check_eks_cluster.sh &&\
             ./check_eks_cluster.sh
+            no_output_timeout: 45m
 
   
 workflows:
   default:
     jobs:
-      - lint-react-app
-      - lint-dockerfile:
-          requires: [lint-react-app]
-      - docker-build
-      - upload-docker-latest:
-          requires: [docker-build]
-      - eks-cluster:
-          requires:
-            - shellcheck/check:
-                dir: ./check_eks_cluster.sh
-          exclude: SC2148
+      - eks-cluster
