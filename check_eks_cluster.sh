@@ -1,6 +1,7 @@
 #install kubectl
-curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
-
+curl -LO https://dl.k8s.io/release/v1.21.0/usr/local/bin/kubectl
+mkdir -p ~/.local/bin/kubectl
+mv ./kubectl ~/.local/bin/kubectl
 chmod +x kubectl
 kubectl version --client
 
