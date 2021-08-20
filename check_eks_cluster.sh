@@ -1,6 +1,6 @@
 
 #check if cluster exists on aws
-aws eks describe-cluster --name capstone-cluster 
+aws eks describe-cluster --name test-cluster 
 
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
