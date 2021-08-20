@@ -79,11 +79,9 @@ jobs:
       - checkout
       - run: 
           name: Create-Eks-Cluster
-          command: |
+          command: |            
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
-            no_output_timeout: 30m
-
   
   dockerhub-registry:
     executor: docker-publisher
