@@ -80,7 +80,7 @@ jobs:
       - run: 
           name: Create-Eks-Cluster
           command: |
-            ./install_kubectl.sh
+            . ./install_kubectl.sh
             . ./install_eksctl.sh
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
