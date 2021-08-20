@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t $IMAGE_NAME:latest .
+            docker build -t $IMAGE_NAME:$CIRCLE_BUILD_NUM .
       - run:
           name: Archive Docker image
           command: docker save -o image.tar $IMAGE_NAME
@@ -69,9 +69,8 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "kelphils" --password-stdin
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
-            docker push $IMAGE_NAME:latest
-            docker push $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:$CIRCLE_BUILD_NUM
+            
   eks-cluster:
     docker:
       - image: amazon/aws-cli
@@ -83,19 +82,7 @@ jobs:
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
   
-  dockerhub-registry:
-    executor: docker-publisher
-    steps:
-      - checkout
-      - run: 
-          name: Create secret docker registry
-          command: |  
-            kubectl create secret docker-registry docker-secret \
-              --docker-server="https://index.docker.io/v1/" \
-              --docker-username="kelphils" \
-              --docker-password="$DOCKERHUB_PASS" \
-              --docker-email="obiohakelvin96@gmail.com" \
-              --namespace="udacity-capstone-proj "      
+  
               
 workflows:
   default:
@@ -103,9 +90,9 @@ workflows:
       # - lint-react-app
       # - lint-dockerfile:
           # requires: [lint-react-app]
-      # - docker-build
-      # - upload-docker-latest:
-          # requires: [docker-build]
+      - docker-build
+      - upload-docker-latest:
+          requires: [docker-build]
       - eks-cluster
-      # - dockerhub-registry:
-          # requires: [eks-cluster]
+      - dockerhub-registry:
+          requires: [eks-cluster]
