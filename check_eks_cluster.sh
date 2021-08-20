@@ -1,10 +1,6 @@
 
 #check if cluster exists on aws
-aws eks describe-cluster --name test-cluster 
 
-if [ $? -eq 0 ]; then
-    echo "Cluster Exists!"
-else
 #creates new cluster
     eksctl create cluster \
     --name test-cluster \
@@ -18,4 +14,3 @@ else
     --ssh-public-key AWS_EC2_DEMO \
     --managed
     echo "New Cluster Created"
-fi
