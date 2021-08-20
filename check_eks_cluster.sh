@@ -14,20 +14,15 @@ mv /tmp/eksctl /usr/local/bin
 
 eksctl version
 #check if cluster exists on aws
-aws eks describe-cluster --name capstone-cluster 
+aws eks describe-cluster --name react-app
+
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
 else
-    eksctl create cluster \
-        --name capstone-cluster \
-        --region us-east-1 \
-        --name react-app \
-        --node-type t2.large \
-        --nodes 3 \
-        --nodes-min 2 \
-        --nodes-max 4 \
-        --ssh-access \
-        --ssh-public-key AWS_EC2_DEMO \
-        --managed
+#creates new cluster
+    aws eks update-cluster-config \
+    --region us-east-1 \
+    --name react-app \
+    --resources-vpc-config endpointPublicAccess=true,endpointPrivateAccess=true
     echo "New Cluster Created"
 fi

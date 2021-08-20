@@ -83,8 +83,22 @@ jobs:
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
             no_output_timeout: 30m
-            
+
   
+  dockerhub-registry:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - run: 
+          name: Create secret docker registry
+          command: |  
+            kubectl create secret docker-registry docker-secret \
+              --docker-server="https://index.docker.io/v1/" \
+              --docker-username="kelphils" \
+              --docker-password="$DOCKERHUB_PASS" \
+              --docker-email="obiohakelvin96@gmail.com" \
+              --namespace="udacity-capstone-proj "      
+              
 workflows:
   default:
     jobs:
@@ -95,3 +109,4 @@ workflows:
       # - upload-docker-latest:
           # requires: [docker-build]
       - eks-cluster
+      - dockerhub-registry
