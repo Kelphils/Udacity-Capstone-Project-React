@@ -81,6 +81,17 @@ jobs:
           command: |            
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
+
+  deploy-app-k8s:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: 
+          name: Deploy to Eks Cluster
+          command: |            
+            chmod +x deploy_eks_cluster.sh &&\
+            . ./deploy_eks_cluster.sh
   
   
               
@@ -93,5 +104,8 @@ workflows:
       - docker-build
       - upload-docker-latest:
           requires: [docker-build]
-      - eks-cluster
+      - eks-cluster:
+          requires: [upload-docker-latest]
+      - deploy-app-k8s:
+          requires: [eks-cluster]
       

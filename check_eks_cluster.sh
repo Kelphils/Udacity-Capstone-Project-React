@@ -1,10 +1,3 @@
-#install kubectl
-curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
-chmod +x kubectl
-
-mv kubectl /usr/local/bin
-kubectl version --client
-
 #install eksctl
 yum install -y tar gzip
 
@@ -18,5 +11,17 @@ CLUSTER_DETAILS="$(aws eks describe-cluster --name react-app)"
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
 else
+    eksctl create cluster \
+        --name react-app \
+        --version 1.21 \
+        --with-oidc \
+        --nodegroup-name react-app-nodegroup \
+        --node-type t2.medium \
+        --nodes 2 \
+        --nodes-min 2 \
+        --nodes-max 4 \
+        --ssh-access \
+        --ssh-public-key AWS_EC2_DEMO \
+        --managed
     echo "New Cluster Created"
 fi
