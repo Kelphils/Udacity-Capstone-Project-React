@@ -2,8 +2,6 @@
 curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl.sha256
 
 chmod +x kubectl
-mkdir -p ~/.local/bin/kubectl
-mv ./kubectl ~/.local/bin/kubectl
 kubectl version --client
 
 #install eksctl
