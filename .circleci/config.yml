@@ -80,6 +80,10 @@ jobs:
       - run: 
           name: Create-Eks-Cluster
           command: |
+            chmod +x install_kubectl.sh && \
+            . ./install_kubectl.sh
+            chmod +x install_eksctl.sh && \
+            . ./install_eksctl.sh
             chmod +x check_eks_cluster.sh &&\
             . ./check_eks_cluster.sh
             no_output_timeout: 30m
