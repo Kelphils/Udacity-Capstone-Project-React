@@ -19,10 +19,5 @@ aws eks describe-cluster --name react-app
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
 else
-#creates new cluster
-    aws eks update-cluster-config \
-    --region us-east-1 \
-    --name react-app \
-    --resources-vpc-config endpointPublicAccess=true,endpointPrivateAccess=true
     echo "New Cluster Created"
 fi
