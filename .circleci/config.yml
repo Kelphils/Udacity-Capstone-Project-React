@@ -69,7 +69,7 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "kelphils" --password-stdin
-            docker push $IMAGE_NAME:$CIRCLE_BUILD_NUM
+            docker push $IMAGE_NAME:$CIRCLE_PREVIOUS_BUILD_NUM
             
   eks-cluster:
     docker:
@@ -94,3 +94,4 @@ workflows:
       - upload-docker-latest:
           requires: [docker-build]
       - eks-cluster
+      
