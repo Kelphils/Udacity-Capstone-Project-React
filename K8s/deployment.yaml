@@ -26,6 +26,6 @@ spec:
                 - arm64
       containers:
       - name: test
-        image: kelphils/react-capstone:my-running-app
+        image: kelphils/react-capstone:VERSION
         ports:
         - containerPort: 3000
