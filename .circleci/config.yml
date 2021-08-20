@@ -107,5 +107,5 @@ workflows:
       # - upload-docker-latest:
           # requires: [docker-build]
       - eks-cluster
-      - dockerhub-registry:
-          requires: [eks-cluster]
+      # - dockerhub-registry:
+          # requires: [eks-cluster]
