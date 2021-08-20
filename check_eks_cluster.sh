@@ -14,7 +14,7 @@ mv /tmp/eksctl /usr/local/bin
 
 eksctl version
 #check if cluster exists on aws
-CLUSTER_DETAILS="$(aws eks describe-cluster --name reat-app)"
+CLUSTER_DETAILS="$(aws eks describe-cluster --name react-app)"
 
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
