@@ -1,10 +1,5 @@
 
-#check if cluster exists on aws
 
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_arm64.tar.gz" | tar xz -C /tmp
-sudo mv /tmp/eksctl /usr/local/bin
-
-eksctl version
 
 #install kubectl
 
@@ -14,7 +9,12 @@ chmod +x ./kubectl
 
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
 echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+#check if cluster exists on aws
 
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
 #creates new cluster
     eksctl create cluster \
     --name test-cluster \
