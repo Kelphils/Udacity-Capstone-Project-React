@@ -16,10 +16,6 @@ eksctl version
 CLUSTER_DETAILS="$(aws eks describe-cluster --name react-app)"
 
 if [ $? -eq 0 ]; then
-aws eks update-cluster-config \
-    --region us-east-1 \
-    --name react-app \
-    --resources-vpc-config endpointPublicAccess=true,endpointPrivateAccess=true
     echo "Cluster Exists!"
 else
     echo "New Cluster Created"
