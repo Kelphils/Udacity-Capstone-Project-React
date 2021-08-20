@@ -1,5 +1,5 @@
 #install kubectl
-curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl
+curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl
 chmod +x kubectl
 
 mv kubectl /usr/local/bin
@@ -18,5 +18,9 @@ CLUSTER_DETAILS="$(aws eks describe-cluster --name react-app)"
 if [ $? -eq 0 ]; then
     echo "Cluster Exists!"
 else
+aws eks update-cluster-config \
+    --region us-east-1 \
+    --name react-app \
+    --resources-vpc-config endpointPublicAccess=true,endpointPrivateAccess=true
     echo "New Cluster Created"
 fi
