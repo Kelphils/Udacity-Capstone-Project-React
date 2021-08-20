@@ -93,4 +93,5 @@ jobs:
 workflows:
   default:
     jobs:
+      - lint-react-app
       - eks-cluster
