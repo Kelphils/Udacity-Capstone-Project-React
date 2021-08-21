@@ -85,6 +85,8 @@ jobs:
   deploy-app-k8s:
     docker:
       - image: amazon/aws-cli
+    environment:
+      CIRCLE_COMPARE_URL: << pipeline.id >>/compare/<< pipeline.number >>
     steps:
       - checkout
       - run: 

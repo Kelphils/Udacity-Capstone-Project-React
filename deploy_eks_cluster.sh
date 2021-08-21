@@ -16,4 +16,4 @@ sed -i "s/VERSION/${CIRCLE_WORKFLOW_ID}/g" K8s/deployment.yaml
 
 echo "Version updated"
 
-cat K8s/deployment.yaml
+echo $CIRCLE_COMPARE_URL
