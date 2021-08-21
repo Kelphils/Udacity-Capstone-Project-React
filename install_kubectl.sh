@@ -13,4 +13,4 @@ docker build --tag=my-running-app .
 docker image ls
 
 # Run flask app
-docker run -p 3000:3000 my-running-app
+docker run -p 3080:3000 my-running-app

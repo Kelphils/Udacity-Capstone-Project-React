@@ -11,7 +11,7 @@ aws eks --region us-east-1 update-kubeconfig --name react-app
 # get k8s nodes
 kubectl get nodes
 
-# update image tag
+# update image with current image tag
 sed -i "s/VERSION/${PIPELINE_NUMBER}/g" K8s/deployment.yaml
 
 echo "Version updated"
