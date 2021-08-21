@@ -10,8 +10,8 @@ dockerpath="kelphils/react-capstone"
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 # Authenticate & tag
-docker login -u kelphils -p ${}
-docker tag proj-app $dockerpath:latest
+docker login -u kelphils -p 7b226f49-1e13-4089-9ffa-abdd9c85ff21
+docker tag my-running-app $dockerpath:latest
 
 # Step 3:
 # Push image to a docker repository
