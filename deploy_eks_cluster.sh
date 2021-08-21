@@ -16,4 +16,4 @@ sed -i "s/VERSION/${CIRCLCI_WORKFLOW_ID}/g" K8s/deployment.yaml
 
 echo "Version updated"
 
-less K8s/deployment.yaml
+cat K8s/deployment.yaml
