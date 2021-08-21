@@ -12,7 +12,7 @@ aws eks --region us-east-1 update-kubeconfig --name react-app
 kubectl get nodes
 
 # update image tag
-sed -i "s/VERSION/${CIRCLCI_WORKFLOW_ID}/g" K8s/deployment.yaml
+sed -i "s/VERSION/${CIRCLE_WORKFLOW_ID}/g" K8s/deployment.yaml
 
 echo "Version updated"
 
