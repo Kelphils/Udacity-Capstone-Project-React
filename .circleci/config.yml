@@ -104,14 +104,15 @@ jobs:
 workflows:
   default:
     jobs:
-      # - lint-react-app
-      # - lint-dockerfile:
-          # requires: [lint-react-app]
-      # - docker-build
-      # - upload-docker-latest:
-          # requires: [docker-build]
-      # - eks-cluster:
-          # requires: [upload-docker-latest]
-      - deploy-app-k8s
-          # requires: [eks-cluster]
+      - lint-react-app
+      - lint-dockerfile:
+          requires: [lint-react-app]
+      - docker-build:
+          requires: [lint-dockerfile]
+      - upload-docker-latest:
+          requires: [docker-build]
+      - eks-cluster:
+          requires: [upload-docker-latest]
+      - deploy-app-k8s:
+          requires: [eks-cluster]
       

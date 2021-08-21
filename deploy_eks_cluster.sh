@@ -18,4 +18,4 @@ echo "Version updated"
 
 echo $PIPELINE_NUMBER
 
-cat K8s/deployment.yaml
+kubectl apply -f K8s/
